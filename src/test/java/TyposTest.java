@@ -21,7 +21,7 @@ public class TyposTest {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
         driver = new ChromeDriver(options);
-         driver.manage().window().maximize();
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
@@ -29,12 +29,26 @@ public class TyposTest {
     public void elementsTest() {
         driver.get("http://the-internet.herokuapp.com/typos");
         WebElement typos = driver.findElement(By.className("example"));
-
-        assertEquals(typos.getAttribute("innerText"), "Typos\n" +
+        if (typos.getText().equals("Typos\n" +
                 "\n" +
                 "This example demonstrates a typo being introduced. It does it randomly on each page load.\n" +
                 "\n" +
-                "Sometimes you'll see a typo, other times you won't.");
+                "Sometimes you'll see a typo, other times you won't.")) {
+
+            assertEquals(typos.getAttribute("innerText"), "Typos\n" +
+                    "\n" +
+                    "This example demonstrates a typo being introduced. It does it randomly on each page load.\n" +
+                    "\n" +
+                    "Sometimes you'll see a typo, other times you won't.");
+
+        } else {
+            assertEquals(typos.getText(), "Typos\n" +
+                    "\n" +
+                    "This example demonstrates a typo being introduced. It does it randomly on each page load.\n" +
+                    "\n" +
+                    "Sometimes you'll see a typo, other times you won,t.");
+
+        }
 
     }
 
