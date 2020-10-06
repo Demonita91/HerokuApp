@@ -1,30 +1,13 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.*;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
-public class CheckboxesTest {
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resourses/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(false);
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-    }
+public class CheckboxesTest extends BaseTest {
 
     @Test
     public void elementsTest() {
@@ -36,17 +19,5 @@ public class CheckboxesTest {
         assertTrue(checkboxes.get(1).isSelected(), "второй чекбокс должен быть выбран");
         checkboxes.get(1).click();
         assertFalse(checkboxes.get(1).isSelected(), "второй чекбокс не должен быть выбран");
-
     }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
-
-//    проверить, что первый чекбокс unchecked, отметить первый чекбокс,
-//    проверить что он checked. Проверить, что второй чекбокс checked,
-//    сделать unheck, проверить, что он unchecked
-
-
 }
